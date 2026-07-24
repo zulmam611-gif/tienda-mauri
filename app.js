@@ -217,16 +217,7 @@ const iniciarSesionAdministrador =
 const mensajeLogin =
   document.getElementById("mensajeLogin");
 
-const abrirLoginAdmin = document.getElementById("abrirLoginAdmin");
 
-abrirLoginAdmin.addEventListener("click", () => {
-  modalLogin.style.display = "flex";
-});
-
-cerrarLogin.addEventListener("click", () => {
-  modalLogin.style.display = "none";
-});
-/*
 ==================================================
 FUNCIONES GENERALES
 ==================================================
