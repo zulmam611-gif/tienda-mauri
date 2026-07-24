@@ -2067,7 +2067,9 @@ INICIAR CARRITO
 ==================================================
 */
 
-actualizarCarrito();document.getElementById("abrirLoginAdmin")?.addEventListener("click", () => {
+actualizarCarrito()
+
+document.getElementById("abrirLoginAdmin")?.addEventListener("click", () => {
   const ventanaLogin = document.getElementById("modalLogin");
 
   ventanaLogin.classList.add("activo");
