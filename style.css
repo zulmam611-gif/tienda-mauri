@@ -1311,4 +1311,10 @@ select option {
 #cerrarPanelCarrito:hover,
 #cerrarPanelAdministrador:hover {
     background: #333;
+    
+}.whatsapp-float,
+.boton-whatsapp,
+#botonWhatsapp,
+#whatsappButton {
+    display: none !important;
 }
