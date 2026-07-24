@@ -1317,4 +1317,85 @@ select option {
 #botonWhatsapp,
 #whatsappButton {
     display: none !important;
+    
+}/* ==============================
+   PANEL ADMINISTRADOR EN CELULAR
+============================== */
+
+@media (max-width: 768px) {
+
+  #panelAdministrador {
+    width: 100% !important;
+    max-width: 100% !important;
+    height: 100dvh !important;
+    max-height: 100dvh !important;
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
+    padding-bottom: 30px !important;
+    box-sizing: border-box !important;
+  }
+
+  #panelAdministrador * {
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+
+  #panelAdministrador input,
+  #panelAdministrador select,
+  #panelAdministrador textarea,
+  #panelAdministrador button {
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+
+  #panelAdministrador textarea {
+    resize: vertical;
+  }
+
+  #listaProductosAdmin {
+    width: 100% !important;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 12px !important;
+    overflow: hidden !important;
+  }
+
+  #listaProductosAdmin .producto,
+  #listaProductosAdmin .producto-admin,
+  #listaProductosAdmin .tarjeta-producto,
+  #listaProductosAdmin article {
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+    margin: 0 !important;
+    display: grid !important;
+    grid-template-columns: 70px minmax(0, 1fr) auto !important;
+    align-items: center !important;
+    gap: 10px !important;
+    padding: 10px !important;
+    overflow: hidden !important;
+  }
+
+  #listaProductosAdmin img {
+    width: 70px !important;
+    height: 70px !important;
+    object-fit: cover !important;
+    border-radius: 10px !important;
+    display: block !important;
+  }
+
+  #listaProductosAdmin h3,
+  #listaProductosAdmin p,
+  #listaProductosAdmin span {
+    max-width: 100% !important;
+    overflow-wrap: anywhere !important;
+  }
+
+  #cerrarPanelAdministrador {
+    position: sticky !important;
+    top: 0 !important;
+    z-index: 20 !important;
+    width: calc(100% - 20px) !important;
+    margin: 10px !important;
+  }
 }
