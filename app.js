@@ -217,6 +217,15 @@ const iniciarSesionAdministrador =
 const mensajeLogin =
   document.getElementById("mensajeLogin");
 
+const abrirLoginAdmin = document.getElementById("abrirLoginAdmin");
+
+abrirLoginAdmin.addEventListener("click", () => {
+  modalLogin.style.display = "flex";
+});
+
+cerrarLogin.addEventListener("click", () => {
+  modalLogin.style.display = "none";
+});
 /*
 ==================================================
 FUNCIONES GENERALES
@@ -317,6 +326,9 @@ MOSTRAR PRODUCTOS EN LA TIENDA
 ==================================================
 */
 
+const listaProductos =
+  document.getElementById("listaProductos");
+
 function renderizarProductos() {
 
   let resultado = [...productos];
@@ -335,12 +347,20 @@ function renderizarProductos() {
   const categoriaSeleccionada =
     filtroCategoria.value;
     
+    if (
+  textoBusqueda === "" &&
+  generoSeleccionado === "" &&
+  categoriaSeleccionada === ""
+) {
+  listaProductos.innerHTML = "";
+  return;
+}
 if (
   textoBusqueda === "" &&
   generoSeleccionado === "" &&
   categoriaSeleccionada === ""
 ) {
-  contenedorProductos.innerHTML = "";
+  listaProductos.innerHTML = "";
   return;
 }
 
