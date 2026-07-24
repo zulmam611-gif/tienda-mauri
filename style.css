@@ -1173,4 +1173,31 @@ textarea:focus {
     padding: 11px 15px;
     font-size: 13px;
   }
+}/* ARREGLAR FILTROS Y BUSCADOR EN TEMA OSCURO */
+
+.buscador,
+.filtros,
+.filtro {
+  background: #171717 !important;
+  border: 1px solid #333 !important;
+}
+
+.buscador input,
+.filtros select,
+.filtro select,
+select,
+input {
+  background: #171717 !important;
+  color: #ffffff !important;
+  border: 1px solid #333 !important;
+}
+
+.buscador input::placeholder,
+input::placeholder {
+  color: #9a9a9a !important;
+}
+
+select option {
+  background: #171717 !important;
+  color: #ffffff !important;
 }
