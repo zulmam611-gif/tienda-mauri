@@ -217,7 +217,15 @@ const iniciarSesionAdministrador =
 const mensajeLogin =
   document.getElementById("mensajeLogin");
 
+const abrirLoginAdmin = document.getElementById("abrirLoginAdmin");
 
+abrirLoginAdmin.addEventListener("click", () => {
+  modalLogin.style.display = "flex";
+});
+
+cerrarLogin.addEventListener("click", () => {
+  modalLogin.style.display = "none";
+});
 /*
 ==================================================
 FUNCIONES GENERALES
@@ -317,6 +325,9 @@ onSnapshot(
 MOSTRAR PRODUCTOS EN LA TIENDA
 ==================================================
 */
+
+const listaProductos =
+  document.getElementById("listaProductos");
 
 function renderizarProductos() {
 
@@ -2097,4 +2108,29 @@ if (cerrarPanelAdministrador) {
     cerrarPanelAdministrador.addEventListener("click", () => {
         document.getElementById("panelAdministrador").classList.remove("activo");
     });
-}
+}window.seleccionarCategoria = function (categoria) {
+  const generoElegido = prompt(
+    "Elegí el género:\n\n1 - Hombre\n2 - Mujer\n3 - Unisex"
+  );
+
+  let genero = "";
+
+  if (generoElegido === "1") {
+    genero = "Hombre";
+  } else if (generoElegido === "2") {
+    genero = "Mujer";
+  } else if (generoElegido === "3") {
+    genero = "Unisex";
+  } else {
+    return;
+  }
+
+  filtroCategoria.value = categoria;
+  filtroGenero.value = genero;
+
+  renderizarProductos();
+
+  document
+    .getElementById("productos")
+    ?.scrollIntoView({ behavior: "smooth" });
+};
