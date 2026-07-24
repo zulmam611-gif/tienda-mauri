@@ -1,0 +1,840 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <meta
+    name="description"
+    content="Tienda online de ropa, calzados y accesorios para hombre y mujer"
+  >
+
+  <title>MI TIENDA PRO XD</title>
+
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <header class="header">
+
+    <div class="contenedor header-contenido">
+
+      <a href="#inicio" class="logo">
+    <img src="IMG/logo.png" alt="Logo">
+    <span>TIENDA <strong>mauri</strong></span>
+</a>
+      <nav class="navegacion">
+
+        <a href="#inicio">
+          Inicio
+        </a>
+
+        <a href="#productos">
+          Productos
+        </a>
+
+        <a href="#contacto">
+          Contacto
+        </a>
+
+      </nav>
+
+      <div class="header-acciones">
+
+        <button
+          id="botonAdministrador"
+          class="boton boton-secundario"
+          type="button"
+        >
+          Administrador
+        </button>
+
+        <button
+          id="botonCarrito"
+          class="boton-carrito"
+          type="button"
+        >
+          🛒
+
+          <span>
+            Carrito
+          </span>
+
+          <strong
+            id="contadorCarrito"
+            class="contador-carrito"
+          >
+            0
+          </strong>
+        </button>
+
+      </div>
+
+    </div>
+
+  </header>
+
+
+  <main>
+
+    <section
+      id="inicio"
+      class="hero"
+    >
+
+      <div class="contenedor hero-contenido">
+
+        <div class="hero-texto">
+
+          <span class="hero-etiqueta">
+            NUEVA COLECCIÓN
+          </span>
+
+          <h1>
+            Vestite con
+            <span>tu propio estilo.</span>
+          </h1>
+
+          <p>
+            Encontrá ropa, zapatos y accesorios
+            para hombre y mujer. Elegí tus productos
+            y realizá tu pedido directamente por WhatsApp.
+          </p>
+
+          <div class="hero-botones">
+
+            <a
+              href="#productos"
+              class="boton boton-principal"
+            >
+              Ver productos
+            </a>
+
+            <button
+              id="botonModaMujer"
+              class="boton boton-secundario"
+              type="button"
+            >
+              Moda mujer
+            </button>
+
+            <button
+              id="botonModaHombre"
+              class="boton boton-secundario"
+              type="button"
+            >
+              Moda hombre
+            </button>
+
+          </div>
+
+        </div>
+
+        <div class="hero-imagen">
+<img src="IMG/banner.png" alt="Urban Style" class="hero-logo">
+          <div class="hero-tarjeta">
+
+            <span>
+              Productos nuevos
+            </span>
+
+            <strong>
+              Cada semana
+            </strong>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <section class="beneficios">
+
+      <div class="contenedor beneficios-grid">
+
+        <article class="beneficio">
+
+          <div class="beneficio-icono">
+            🚚
+          </div>
+
+          <div>
+
+            <h3>
+              Entregas coordinadas
+            </h3>
+
+            <p>
+              Coordiná el envío o retiro
+              directamente por WhatsApp.
+            </p>
+
+          </div>
+
+        </article>
+
+
+        <article class="beneficio">
+
+          <div class="beneficio-icono">
+            🔒
+          </div>
+
+          <div>
+
+            <h3>
+              Compra sencilla
+            </h3>
+
+            <p>
+              Agregá productos al carrito
+              y enviá tu pedido rápidamente.
+            </p>
+
+          </div>
+
+        </article>
+
+
+        <article class="beneficio">
+
+          <div class="beneficio-icono">
+            ✨
+          </div>
+
+          <div>
+
+            <h3>
+              Catálogo actualizado
+            </h3>
+
+            <p>
+              Los productos se cargarán
+              directamente desde Firebase.
+            </p>
+
+          </div>
+
+        </article>
+
+      </div>
+
+    </section>
+
+
+    <section
+      id="productos"
+      class="seccion-productos"
+    >
+
+      <div class="contenedor">
+
+        <div class="titulo-seccion">
+
+          <div>
+
+            <span>
+              CATÁLOGO
+            </span>
+
+            <h2>
+              Nuestros productos
+            </h2>
+
+          </div>
+
+          <p>
+            Buscá por nombre, género o categoría.
+          </p>
+
+        </div>
+
+
+        <div class="filtros">
+
+          <div class="grupo-busqueda">
+
+            <span>
+              🔍
+            </span>
+
+            <input
+              id="busquedaProducto"
+              type="search"
+              placeholder="Buscar producto..."
+            >
+
+          </div>
+
+
+          <select id="filtroGenero">
+
+            <option value="">
+              Todos los géneros
+            </option>
+
+            <option value="Hombre">
+              Hombre
+            </option>
+
+            <option value="Mujer">
+              Mujer
+            </option>
+
+            <option value="Unisex">
+              Unisex
+            </option>
+
+          </select>
+
+
+          <select id="filtroCategoria">
+
+            <option value="">
+              Todas las categorías
+            </option>
+
+            <option value="Ropa">
+              Ropa
+            </option>
+
+            <option value="Calzados">
+              Calzados
+            </option>
+
+            <option value="Accesorios">
+              Accesorios
+            </option>
+
+          </select>
+
+
+          <select id="ordenProductos">
+
+            <option value="recientes">
+              Más recientes
+            </option>
+
+            <option value="menor">
+              Menor precio
+            </option>
+
+            <option value="mayor">
+              Mayor precio
+            </option>
+
+            <option value="nombre">
+              Nombre A-Z
+            </option>
+
+          </select>
+
+        </div>
+
+
+        <div
+          id="estadoProductos"
+          class="estado-productos"
+        >
+          Cargando productos...
+        </div>
+
+
+        <div
+          id="listaProductos"
+          class="productos-grid"
+        >
+        </div>
+
+      </div>
+
+    </section>
+
+  </main>
+
+
+  <footer
+    id="contacto"
+    class="footer"
+  >
+
+    <div class="contenedor footer-grid">
+
+      <div>
+
+        <a
+          href="#inicio"
+          class="logo logo-footer"
+        >
+          URBAN <span>STYLE</span>
+        </a>
+
+        <p>
+          Tienda online de ropa,
+          calzados y accesorios.
+        </p>
+
+      </div>
+
+
+      <div>
+
+        <h3>
+          Contacto
+        </h3>
+
+        <p id="telefonoVisible">
+          +595 982766005
+        </p>
+
+        <p>
+          Paraguay
+        </p>
+
+      </div>
+
+
+      <div>
+
+        <h3>
+          Redes
+        </h3>
+
+        <a href="#">
+          Instagram
+        </a>
+
+        <a href="#">
+          Facebook
+        </a>
+
+      </div>
+
+    </div>
+
+
+    <div class="contenedor copyright">
+
+      © <span id="anioActual"></span>
+      Urban Style.
+      Todos los derechos reservados.
+
+    </div>
+
+  </footer>
+
+
+  <div
+    id="fondoPanel"
+    class="fondo-panel"
+  >
+  </div>
+
+
+  <aside
+    id="panelCarrito"
+    class="panel-lateral"
+  >
+
+    <div class="panel-cabecera">
+
+      <div>
+
+        <span>
+          TU COMPRA
+        </span>
+
+        <h2>
+          Carrito
+        </h2>
+
+      </div>
+
+      <button
+        id="cerrarCarrito"
+        class="boton-cerrar"
+        type="button"
+      >
+        ✕
+      </button>
+
+    </div>
+
+
+    <div
+      id="contenidoCarrito"
+      class="panel-contenido"
+    >
+    </div>
+
+
+    <div class="panel-pie">
+
+      <div class="carrito-total">
+
+        <span>
+          Total
+        </span>
+
+        <strong id="totalCarrito">
+          Gs. 0
+        </strong>
+
+      </div>
+
+      <input
+        id="nombreCliente"
+        class="campo"
+        type="text"
+        placeholder="Tu nombre"
+      >
+
+      <input
+        id="direccionCliente"
+        class="campo"
+        type="text"
+        placeholder="Ciudad o dirección"
+      >
+
+      <button
+        id="enviarPedido"
+        class="boton boton-whatsapp boton-ancho"
+        type="button"
+      >
+        Enviar pedido por WhatsApp
+      </button>
+
+      <button
+        id="vaciarCarrito"
+        class="boton boton-secundario boton-ancho"
+        type="button"
+      >
+        Vaciar carrito
+      </button>
+
+    </div>
+
+  </aside>
+
+
+  <aside
+    id="panelAdministrador"
+    class="panel-lateral panel-admin"
+  >
+
+    <div class="panel-cabecera">
+
+      <div>
+
+        <span>
+          GESTIÓN
+        </span>
+
+        <h2>
+          Administrador
+        </h2>
+
+      </div>
+
+      <button
+        id="cerrarAdministrador"
+        class="boton-cerrar"
+        type="button"
+      >
+        ✕
+      </button>
+
+    </div>
+
+
+    <div class="panel-contenido">
+
+      <form id="formularioProducto">
+
+        <input
+          id="productoId"
+          type="hidden"
+        >
+
+
+        <div class="grupo-formulario">
+
+          <label for="nombreProducto">
+            Nombre del producto
+          </label>
+
+          <input
+            id="nombreProducto"
+            class="campo"
+            type="text"
+            placeholder="Ejemplo: Zapatilla urbana negra"
+            required
+          >
+
+        </div>
+
+
+        <div class="grupo-formulario">
+
+          <label for="precioProducto">
+            Precio en guaraníes
+          </label>
+
+          <input
+            id="precioProducto"
+            class="campo"
+            type="number"
+            min="0"
+            placeholder="250000"
+            required
+          >
+
+        </div>
+<div class="grupo-formulario">
+    <label for="stockProducto">Stock disponible</label>
+
+    <input
+        id="stockProducto"
+        class="campo"
+        type="number"
+        min="0"
+        placeholder="Ejemplo: 10"
+        required
+    >
+</div>
+
+        <div class="formulario-doble">
+
+          <div class="grupo-formulario">
+
+            <label for="generoProducto">
+              Género
+            </label>
+
+            <select
+              id="generoProducto"
+              class="campo"
+              required
+            >
+
+              <option value="Hombre">
+                Hombre
+              </option>
+
+              <option value="Mujer">
+                Mujer
+              </option>
+
+              <option value="Unisex">
+                Unisex
+              </option>
+
+            </select>
+
+          </div>
+
+
+          <div class="grupo-formulario">
+
+            <label for="categoriaProducto">
+              Categoría
+            </label>
+
+            <select
+              id="categoriaProducto"
+              class="campo"
+              required
+            >
+
+              <option value="Ropa">
+                Ropa
+              </option>
+
+              <option value="Calzados">
+                Calzados
+              </option>
+
+              <option value="Accesorios">
+                Accesorios
+              </option>
+
+            </select>
+
+          </div>
+
+        </div>
+
+
+        <div class="grupo-formulario">
+
+          <label for="descripcionProducto">
+            Descripción
+          </label>
+
+          <textarea
+            id="descripcionProducto"
+            class="campo"
+            placeholder="Color, talle, material, etc."
+          ></textarea>
+
+        </div>
+
+<div class="grupo-formulario">
+
+  <label for="archivoImagen">
+    Seleccionar imagen del producto
+  </label>
+
+  <input
+    id="archivoImagen"
+    class="campo"
+    type="file"
+    accept="image/png, image/jpeg, image/webp"
+  >
+
+  <input
+    id="imagenProducto"
+    type="hidden"
+  >
+
+  <small style="display:block; margin-top:7px; color:#777;">
+    Elegí una imagen JPG, PNG o WEBP.
+  </small>
+
+</div>
+
+        </div>
+
+
+        <img
+          id="vistaPreviaProducto"
+          class="vista-previa"
+          src="https://placehold.co/700x450?text=Vista+previa"
+          alt="Vista previa del producto"
+        >
+
+
+        <div class="botones-formulario">
+
+          <button
+            class="boton boton-principal"
+            type="submit"
+          >
+            Guardar producto
+          </button>
+
+          <button
+            id="limpiarFormulario"
+            class="boton boton-secundario"
+            type="button"
+          >
+            Limpiar
+          </button>
+
+        </div>
+
+      </form>
+
+
+      <div class="separador-admin">
+      </div>
+
+
+      <div class="titulo-lista-admin">
+
+        <h3>
+          Productos cargados
+        </h3>
+
+        <span id="cantidadProductosAdmin">
+          0 productos
+        </span>
+
+      </div>
+
+
+      <div id="listaProductosAdmin">
+      </div>
+
+    </div>
+
+  </aside>
+
+
+  <div
+    id="modalLogin"
+    class="modal"
+  >
+
+    <div class="modal-contenido">
+
+      <button
+        id="cerrarLogin"
+        class="boton-cerrar modal-cerrar"
+        type="button"
+      >
+        ✕
+      </button>
+
+      <span class="modal-etiqueta">
+        ACCESO PRIVADO
+      </span>
+
+      <h2>
+        Iniciar sesión
+      </h2>
+
+      <p>
+        Ingresá tus datos de administrador.
+      </p>
+
+      <input
+        id="emailAdministrador"
+        class="campo"
+        type="email"
+        placeholder="Correo electrónico"
+      >
+
+      <input
+        id="claveAdministrador"
+        class="campo"
+        type="password"
+        placeholder="Contraseña"
+      >
+
+      <div
+        id="mensajeLogin"
+        class="mensaje-login"
+      >
+      </div>
+
+      <button
+        id="iniciarSesionAdministrador"
+        class="boton boton-principal boton-ancho"
+        type="button"
+      >
+        Entrar
+      </button>
+
+    </div>
+
+  </div>
+
+
+  <script
+    type="module"
+    src="app.js"
+  ></script>
+<a href="https://wa.me/595982766005?text=Hola,%20quiero%20comprar%20un%20producto" class="whatsapp-float" target="_blank">
+    💬
+</a>
+</body>
+</html>
