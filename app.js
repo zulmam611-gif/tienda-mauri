@@ -2107,7 +2107,6 @@ if (cerrarPanelAdministrador) {
   document
     .getElementById("productos")
     ?.scrollIntoView({ behavior: "smooth" });
-};
 
 let categoriaElegida = "";
 
