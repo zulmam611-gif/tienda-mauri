@@ -324,8 +324,6 @@ MOSTRAR PRODUCTOS EN LA TIENDA
 ==================================================
 */
 
-const listaProductos =
-  document.getElementById("listaProductos");
 
 function renderizarProductos() {
 
