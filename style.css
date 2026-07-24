@@ -1173,31 +1173,20 @@ textarea:focus {
     padding: 11px 15px;
     font-size: 13px;
   }
-}/* ARREGLAR FILTROS Y BUSCADOR EN TEMA OSCURO */
-
-.buscador,
-.filtros,
-.filtro {
-  background: #171717 !important;
-  border: 1px solid #333 !important;
+}.hero-imagen{
+    display:flex;
+    justify-content:center;
+    align-items:center;
 }
 
-.buscador input,
-.filtros select,
-.filtro select,
-select,
-input {
-  background: #171717 !important;
-  color: #ffffff !important;
-  border: 1px solid #333 !important;
+.hero-banner{
+    width:100%;
+    max-width:520px;
+    border-radius:25px;
+    box-shadow:0 15px 40px rgba(0,0,0,.4);
+    transition:.3s;
 }
 
-.buscador input::placeholder,
-input::placeholder {
-  color: #9a9a9a !important;
-}
-
-select option {
-  background: #171717 !important;
-  color: #ffffff !important;
+.hero-banner:hover{
+    transform:scale(1.03);
 }
