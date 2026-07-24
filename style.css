@@ -1,13 +1,13 @@
 :root {
-  --negro: #111111;
-  --negro-suave: #1a1a1a;
-  --blanco: #ffffff;
-  --gris-claro: #f5f5f5;
-  --gris: #777777;
-  --borde: #e5e5e5;
-  --verde: #16a34a;
-  --rojo: #dc2626;
-  --sombra: 0 18px 45px rgba(0, 0, 0, 0.08);
+--negro: #0d0d0d;
+--negro-suave: #161616;
+--blanco: #ffffff;
+--gris-claro: #101010;
+--gris: #bdbdbd;
+--borde: #2d2d2d;
+--verde: #22c55e;
+--rojo: #ef4444;
+--sombra: 0 15px 40px rgba(0,0,0,.45);
 }
 
 * {
@@ -22,7 +22,8 @@ html {
 
 body {
   font-family: Arial, Helvetica, sans-serif;
-  background: var(--gris-claro);
+  background: linear-gradient(180deg, #0d0d0d, #1a1a1a);
+  min-height: 100vh;
   color: var(--negro);
   line-height: 1.5;
 }
@@ -834,4 +835,342 @@ a {
     border-radius: 50px;
     padding: 12px 18px;
     cursor: pointer;
+}/* =========================================
+   MEJORAS VISUALES - TEMA OSCURO
+========================================= */
+
+/* Encabezado */
+.header {
+  background: rgba(13, 13, 13, 0.92);
+  border-bottom: 1px solid var(--borde);
+  backdrop-filter: blur(14px);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.logo {
+  color: var(--blanco);
+}
+
+.logo span {
+  color: #cfcfcf;
+}
+
+.navegacion a {
+  color: var(--gris);
+  transition: 0.25s;
+}
+
+.navegacion a:hover {
+  color: var(--blanco);
+}
+
+/* Hero */
+.hero {
+  background:
+    radial-gradient(circle at top right, rgba(255,255,255,0.08), transparent 35%),
+    linear-gradient(135deg, #0d0d0d, #181818);
+}
+
+.hero h1,
+.hero h1 span {
+  color: var(--blanco);
+}
+
+.hero p {
+  color: var(--gris);
+}
+
+.hero-etiqueta {
+  color: #d8d8d8;
+}
+
+.hero-imagen {
+  border: 1px solid var(--borde);
+  box-shadow: 0 25px 70px rgba(0, 0, 0, 0.55);
+}
+
+/* Botones */
+.boton {
+  transition: transform 0.2s, box-shadow 0.2s, background 0.2s;
+}
+
+.boton:hover {
+  transform: translateY(-2px);
+}
+
+.boton-principal {
+  background: var(--blanco);
+  color: var(--negro);
+  box-shadow: 0 10px 30px rgba(255, 255, 255, 0.12);
+}
+
+.boton-principal:hover {
+  background: #dedede;
+}
+
+.boton-secundario {
+  background: #1b1b1b;
+  color: var(--blanco);
+  border: 1px solid var(--borde);
+}
+
+.boton-secundario:hover {
+  background: #252525;
+}
+
+/* Secciones */
+section {
+  color: var(--blanco);
+}
+
+.titulo-seccion,
+.titulo-seccion h2,
+.productos-titulo,
+.productos-titulo h2 {
+  color: var(--blanco);
+}
+
+.titulo-seccion p,
+.productos-titulo p {
+  color: var(--gris);
+}
+
+/* Buscador y filtros */
+.buscador,
+.filtros,
+.filtro,
+.campo,
+select,
+input,
+textarea {
+  background: #171717;
+  color: var(--blanco);
+  border: 1px solid var(--borde);
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: #888;
+}
+
+select option {
+  background: #171717;
+  color: var(--blanco);
+}
+
+.buscador:focus-within,
+.campo:focus,
+select:focus,
+input:focus,
+textarea:focus {
+  border-color: #666;
+  box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.06);
+  outline: none;
+}
+
+/* Tarjetas de productos */
+.producto,
+.tarjeta-producto,
+.producto-card {
+  background: linear-gradient(180deg, #1b1b1b, #131313);
+  border: 1px solid var(--borde);
+  box-shadow: 0 16px 45px rgba(0, 0, 0, 0.35);
+  transition: transform 0.25s, border-color 0.25s, box-shadow 0.25s;
+  overflow: hidden;
+}
+
+.producto:hover,
+.tarjeta-producto:hover,
+.producto-card:hover {
+  transform: translateY(-6px);
+  border-color: #555;
+  box-shadow: 0 22px 60px rgba(0, 0, 0, 0.55);
+}
+
+.producto img,
+.tarjeta-producto img,
+.producto-card img {
+  transition: transform 0.35s;
+}
+
+.producto:hover img,
+.tarjeta-producto:hover img,
+.producto-card:hover img {
+  transform: scale(1.04);
+}
+
+.producto h3,
+.tarjeta-producto h3,
+.producto-card h3 {
+  color: var(--blanco);
+}
+
+.producto p,
+.tarjeta-producto p,
+.producto-card p {
+  color: var(--gris);
+}
+
+.precio,
+.producto-precio {
+  color: var(--blanco);
+  font-weight: 800;
+}
+
+/* Tarjetas generales */
+.tarjeta,
+.info-tarjeta,
+.beneficio,
+.contacto-contenido,
+.carrito-contenido {
+  background: #171717;
+  color: var(--blanco);
+  border: 1px solid var(--borde);
+  box-shadow: var(--sombra);
+}
+
+/* Carrito */
+.carrito-lateral,
+.panel-carrito,
+.modal-contenido {
+  background: #141414;
+  color: var(--blanco);
+  border-left: 1px solid var(--borde);
+}
+
+.carrito-item {
+  border-bottom: 1px solid var(--borde);
+}
+
+.carrito-total {
+  color: var(--blanco);
+}
+
+/* Panel administrador */
+.panel-admin,
+.panel-lateral {
+  background: #121212;
+  color: var(--blanco);
+  border-left: 1px solid var(--borde);
+}
+
+.panel-cabecera {
+  border-bottom: 1px solid var(--borde);
+}
+
+.titulo-lista-admin {
+  border-top: 1px solid var(--borde);
+}
+
+.mensaje-login {
+  color: #ff6b6b;
+}
+
+/* Modal de login */
+.modal {
+  background: rgba(0, 0, 0, 0.78);
+  backdrop-filter: blur(7px);
+}
+
+.modal-contenido {
+  border: 1px solid #333;
+  border-radius: 24px;
+  box-shadow: 0 30px 90px rgba(0, 0, 0, 0.65);
+}
+
+/* Botón administrador fijo */
+.boton-admin-fijo {
+  background: linear-gradient(135deg, #fff, #cfcfcf);
+  color: #111;
+  font-weight: 800;
+  box-shadow: 0 14px 35px rgba(0, 0, 0, 0.45);
+}
+
+.boton-admin-fijo:hover {
+  transform: translateY(-3px);
+}
+
+/* WhatsApp */
+.whatsapp-float {
+  box-shadow: 0 15px 35px rgba(37, 211, 102, 0.35);
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #0e0e0e;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #333;
+  border-radius: 20px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #4a4a4a;
+}
+
+/* Animación suave al cargar */
+.hero-contenido,
+.productos,
+.titulo-seccion {
+  animation: aparecer 0.6s ease both;
+}
+
+@keyframes aparecer {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Celular */
+@media (max-width: 768px) {
+  .header {
+    position: sticky;
+  }
+
+  .hero {
+    padding-top: 35px;
+  }
+
+  .hero h1 {
+    font-size: clamp(42px, 13vw, 64px);
+    line-height: 0.98;
+  }
+
+  .hero p {
+    font-size: 17px;
+  }
+
+  .hero-botones {
+    gap: 10px;
+  }
+
+  .boton {
+    min-height: 48px;
+  }
+
+  .producto,
+  .tarjeta-producto,
+  .producto-card {
+    border-radius: 20px;
+  }
+
+  .boton-admin-fijo {
+    left: 16px;
+    bottom: 86px;
+    padding: 11px 15px;
+    font-size: 13px;
+  }
 }
