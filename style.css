@@ -1295,4 +1295,20 @@ select option {
     object-fit: cover;
     object-position: center;
   }
+}#cerrarPanelCarrito,
+#cerrarPanelAdministrador {
+    width: calc(100% - 20px);
+    margin: 10px;
+    padding: 12px;
+    background: #222;
+    color: #fff;
+    border: 1px solid #555;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+#cerrarPanelCarrito:hover,
+#cerrarPanelAdministrador:hover {
+    background: #333;
 }

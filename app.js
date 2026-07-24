@@ -217,6 +217,8 @@ const iniciarSesionAdministrador =
 const mensajeLogin =
   document.getElementById("mensajeLogin");
 
+const abrirLoginAdmin = document.getElementById("abrirLoginAdmin");
+
 abrirLoginAdmin.addEventListener("click", () => {
   modalLogin.style.display = "flex";
 });
@@ -324,6 +326,8 @@ MOSTRAR PRODUCTOS EN LA TIENDA
 ==================================================
 */
 
+const listaProductos =
+  document.getElementById("listaProductos");
 
 function renderizarProductos() {
 
@@ -2075,10 +2079,33 @@ INICIAR CARRITO
 ==================================================
 */
 
+actualizarCarrito();document.getElementById("abrirLoginAdmin")?.addEventListener("click", () => {
+  const ventanaLogin = document.getElementById("modalLogin");
+
+  ventanaLogin.classList.add("activo");
+  ventanaLogin.style.display = "flex";
+  ventanaLogin.style.visibility = "visible";
+  ventanaLogin.style.opacity = "1";
+  ventanaLogin.style.pointerEvents = "auto";
+});
 
 document.getElementById("cerrarLogin")?.addEventListener("click", () => {
   const ventanaLogin = document.getElementById("modalLogin");
 
   ventanaLogin.classList.remove("activo");
   ventanaLogin.style.display = "none";
-});
+});const cerrarPanelCarrito = document.getElementById("cerrarPanelCarrito");
+
+if (cerrarPanelCarrito) {
+    cerrarPanelCarrito.addEventListener("click", () => {
+        document.getElementById("panelCarrito").classList.remove("activo");
+    });
+}
+
+const cerrarPanelAdministrador = document.getElementById("cerrarPanelAdministrador");
+
+if (cerrarPanelAdministrador) {
+    cerrarPanelAdministrador.addEventListener("click", () => {
+        document.getElementById("panelAdministrador").classList.remove("activo");
+    });
+}
