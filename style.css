@@ -823,4 +823,15 @@ a {
 
 .whatsapp-float:hover{
     transform:scale(1.1);
+}.boton-admin-fijo{
+    position: fixed;
+    bottom: 90px;
+    left: 20px;
+    z-index: 9999;
+    background: #111;
+    color: #fff;
+    border: none;
+    border-radius: 50px;
+    padding: 12px 18px;
+    cursor: pointer;
 }
