@@ -1284,7 +1284,7 @@ select option {
   }
 
   .hero-banner {
-    object-fit: cover;
+    object-fit: contain;
     object-position: center;
   }
 }
