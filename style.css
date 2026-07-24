@@ -1189,4 +1189,102 @@ textarea:focus {
 
 .hero-banner:hover{
     transform:scale(1.03);
+}/* =========================================
+   CORREGIR BANNER
+========================================= */
+
+.hero-contenido {
+  display: grid;
+  grid-template-columns: 1fr 1.15fr;
+  align-items: center;
+  gap: 45px;
+}
+
+.hero-imagen {
+  width: 100%;
+  height: 430px;
+  min-height: 430px;
+  display: block;
+  overflow: hidden;
+  border-radius: 28px;
+  background: #080808;
+  border: 1px solid #333;
+}
+
+.hero-banner {
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  display: block;
+  object-fit: cover;
+  object-position: center;
+  border-radius: 28px;
+  box-shadow: none;
+}
+
+/* =========================================
+   CORREGIR CAMPOS BLANCOS
+========================================= */
+
+.buscador,
+.filtros,
+.filtros-productos,
+.barra-filtros {
+  background: #151515 !important;
+  border: 1px solid #333 !important;
+}
+
+.buscador input,
+.filtros input,
+.filtros select,
+.filtros-productos input,
+.filtros-productos select,
+.barra-filtros input,
+.barra-filtros select,
+input[type="search"],
+select {
+  background: #171717 !important;
+  color: #ffffff !important;
+  border: 1px solid #3a3a3a !important;
+}
+
+input::placeholder {
+  color: #999999 !important;
+  opacity: 1;
+}
+
+select option {
+  background: #171717 !important;
+  color: #ffffff !important;
+}
+
+/* Botones que quedaron blancos */
+.boton-secundario,
+.producto button,
+.tarjeta-producto button,
+.producto-card button {
+  background: #1b1b1b !important;
+  color: #ffffff !important;
+  border: 1px solid #444 !important;
+}
+
+/* =========================================
+   CELULAR
+========================================= */
+
+@media (max-width: 768px) {
+  .hero-contenido {
+    grid-template-columns: 1fr;
+    gap: 25px;
+  }
+
+  .hero-imagen {
+    height: 360px;
+    min-height: 360px;
+  }
+
+  .hero-banner {
+    object-fit: cover;
+    object-position: center;
+  }
 }
