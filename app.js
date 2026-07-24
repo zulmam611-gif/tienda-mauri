@@ -194,7 +194,15 @@ const modalLogin =
 
 const cerrarLogin =
   document.getElementById("cerrarLogin");
+const abrirLoginAdmin = document.getElementById("abrirLoginAdmin");
 
+abrirLoginAdmin.addEventListener("click", () => {
+    modalLogin.style.display = "flex";
+});
+
+cerrarLogin.addEventListener("click", () => {
+    modalLogin.style.display = "none";
+});
 const emailAdministrador =
   document.getElementById("emailAdministrador");
 
@@ -208,8 +216,20 @@ const iniciarSesionAdministrador =
 
 const mensajeLogin =
   document.getElementById("mensajeLogin");
+const abrirLoginAdmin = document.getElementById("abrirLoginAdmin");
 
+abrirLoginAdmin.addEventListener("click", () => {
+  modalLogin.classList.add("activo");
+});
+const abrirLoginAdmin = document.getElementById("abrirLoginAdmin");
 
+abrirLoginAdmin.addEventListener("click", () => {
+  modalLogin.style.display = "flex";
+});
+
+cerrarLogin.addEventListener("click", () => {
+  modalLogin.style.display = "none";
+});
 /*
 ==================================================
 FUNCIONES GENERALES
