@@ -1317,85 +1317,187 @@ select option {
 #botonWhatsapp,
 #whatsappButton {
     display: none !important;
-    
-}/* ==============================
-   PANEL ADMINISTRADOR EN CELULAR
-============================== */
+}/* Ocultar género, categoría y orden.
+   El buscador sigue visible. */
+
+#filtroGenero,
+#filtroCategoria,
+#ordenProductos {
+  display: none !important;
+}
+
+.filtros {
+  display: block !important;
+}
+
+.grupo-busqueda {
+  width: 100% !important;
+  max-width: 100% !important;
+}/* =========================
+   CATEGORÍAS
+========================= */
+
+.categorias {
+  padding: 55px 0;
+}
+
+.titulo-categorias {
+  margin-bottom: 25px;
+}
+
+.titulo-categorias span,
+.generos-contenido > span {
+  display: block;
+  margin-bottom: 7px;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 3px;
+  color: #ff4747;
+}
+
+.titulo-categorias h2,
+.generos-contenido h2 {
+  margin: 0;
+  color: #fff;
+  font-size: clamp(28px, 4vw, 45px);
+}
+
+.categorias-grid {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(130px, 1fr));
+  gap: 16px;
+}
+
+.categoria-btn {
+  min-height: 180px;
+  padding: 25px 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+
+  color: #fff;
+  background:
+    linear-gradient(145deg, #202127, #101115);
+  border: 1px solid #3d3f49;
+  border-radius: 18px;
+  cursor: pointer;
+
+  transition:
+    transform 0.25s,
+    border-color 0.25s,
+    box-shadow 0.25s;
+}
+
+.categoria-btn:hover {
+  transform: translateY(-7px);
+  border-color: #ff4747;
+  box-shadow: 0 18px 45px rgba(0, 0, 0, 0.45);
+}
+
+.categoria-icono {
+  font-size: 48px;
+}
+
+.categoria-btn strong {
+  font-size: 18px;
+}
+
+.categoria-btn small {
+  color: #aaa;
+}
+
+/* =========================
+   SECCIÓN DE GÉNEROS
+========================= */
+
+.seccion-generos {
+  display: none;
+  min-height: 65vh;
+  padding: 45px 0 70px;
+}
+
+.seccion-generos.activa {
+  display: block;
+}
+
+.boton-volver-categorias {
+  margin-bottom: 30px;
+  padding: 12px 18px;
+  color: #fff;
+  background: transparent;
+  border: 1px solid #555;
+  border-radius: 12px;
+  cursor: pointer;
+}
+
+.generos-contenido {
+  max-width: 900px;
+  margin: auto;
+  text-align: center;
+}
+
+.generos-contenido p {
+  margin: 12px 0 30px;
+  color: #aaa;
+}
+
+.generos-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.genero-btn {
+  min-height: 210px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+
+  color: #fff;
+  background:
+    linear-gradient(145deg, #222329, #111216);
+  border: 1px solid #41434d;
+  border-radius: 22px;
+  cursor: pointer;
+
+  transition:
+    transform 0.25s,
+    border-color 0.25s,
+    box-shadow 0.25s;
+}
+
+.genero-btn span {
+  font-size: 65px;
+}
+
+.genero-btn strong {
+  font-size: 22px;
+}
+
+.genero-btn:hover {
+  transform: scale(1.04);
+  border-color: #ff4747;
+  box-shadow: 0 20px 55px rgba(0, 0, 0, 0.5);
+}
 
 @media (max-width: 768px) {
-
-  #panelAdministrador {
-    width: 100% !important;
-    max-width: 100% !important;
-    height: 100dvh !important;
-    max-height: 100dvh !important;
-    overflow-y: auto !important;
-    overflow-x: hidden !important;
-    padding-bottom: 30px !important;
-    box-sizing: border-box !important;
+  .categorias-grid {
+    grid-template-columns: repeat(2, 1fr);
   }
 
-  #panelAdministrador * {
-    max-width: 100%;
-    box-sizing: border-box;
+  .categoria-btn {
+    min-height: 145px;
   }
 
-  #panelAdministrador input,
-  #panelAdministrador select,
-  #panelAdministrador textarea,
-  #panelAdministrador button {
-    width: 100% !important;
-    max-width: 100% !important;
+  .generos-grid {
+    grid-template-columns: 1fr;
   }
 
-  #panelAdministrador textarea {
-    resize: vertical;
-  }
-
-  #listaProductosAdmin {
-    width: 100% !important;
-    display: flex !important;
-    flex-direction: column !important;
-    gap: 12px !important;
-    overflow: hidden !important;
-  }
-
-  #listaProductosAdmin .producto,
-  #listaProductosAdmin .producto-admin,
-  #listaProductosAdmin .tarjeta-producto,
-  #listaProductosAdmin article {
-    width: 100% !important;
-    max-width: 100% !important;
-    min-width: 0 !important;
-    margin: 0 !important;
-    display: grid !important;
-    grid-template-columns: 70px minmax(0, 1fr) auto !important;
-    align-items: center !important;
-    gap: 10px !important;
-    padding: 10px !important;
-    overflow: hidden !important;
-  }
-
-  #listaProductosAdmin img {
-    width: 70px !important;
-    height: 70px !important;
-    object-fit: cover !important;
-    border-radius: 10px !important;
-    display: block !important;
-  }
-
-  #listaProductosAdmin h3,
-  #listaProductosAdmin p,
-  #listaProductosAdmin span {
-    max-width: 100% !important;
-    overflow-wrap: anywhere !important;
-  }
-
-  #cerrarPanelAdministrador {
-    position: sticky !important;
-    top: 0 !important;
-    z-index: 20 !important;
-    width: calc(100% - 20px) !important;
-    margin: 10px !important;
+  .genero-btn {
+    min-height: 150px;
   }
 }

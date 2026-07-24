@@ -219,8 +219,54 @@
 
     </section>
 
-<section class="categorias">
+<section class="categorias" id="seccionCategorias">
   <div class="contenedor">
+
+    <div class="titulo-categorias">
+      <span>EXPLORÁ</span>
+      <h2>Elegí una categoría</h2>
+    </div>
+
+    <div class="categorias-grid">
+
+      <button class="categoria-btn" type="button"
+        onclick="abrirGeneros('Remeras')">
+        <span class="categoria-icono">👕</span>
+        <strong>Remeras</strong>
+        <small>Ver productos</small>
+      </button>
+
+      <button class="categoria-btn" type="button"
+        onclick="abrirGeneros('Camisetas')">
+        <span class="categoria-icono">👚</span>
+        <strong>Camisetas</strong>
+        <small>Ver productos</small>
+      </button>
+
+      <button class="categoria-btn" type="button"
+        onclick="abrirGeneros('Pantalones')">
+        <span class="categoria-icono">👖</span>
+        <strong>Pantalones</strong>
+        <small>Ver productos</small>
+      </button>
+
+      <button class="categoria-btn" type="button"
+        onclick="abrirGeneros('Accesorios')">
+        <span class="categoria-icono">🧢</span>
+        <strong>Accesorios</strong>
+        <small>Ver productos</small>
+      </button>
+
+      <button class="categoria-btn" type="button"
+        onclick="abrirGeneros('Zapatos')">
+        <span class="categoria-icono">👟</span>
+        <strong>Zapatos</strong>
+        <small>Ver productos</small>
+      </button>
+
+    </div>
+  </div>
+</section>
 
     <h2>Categorías</h2>
 
@@ -255,6 +301,59 @@
       id="productos"
       class="seccion-productos"
     >
+<section id="seccionGeneros" class="seccion-generos">
+  <div class="contenedor">
+
+    <button
+      type="button"
+      class="boton-volver-categorias"
+      onclick="volverCategorias()"
+    >
+      ← Volver a categorías
+    </button>
+
+    <div class="generos-contenido">
+      <span>ESTÁS VIENDO</span>
+
+      <h2 id="tituloCategoriaGenero">
+        Elegí el género
+      </h2>
+
+      <p>Seleccioná una opción para ver los productos.</p>
+
+      <div class="generos-grid">
+
+        <button
+          type="button"
+          class="genero-btn"
+          onclick="elegirGenero('Hombre')"
+        >
+          <span>👨</span>
+          <strong>Hombre</strong>
+        </button>
+
+        <button
+          type="button"
+          class="genero-btn"
+          onclick="elegirGenero('Mujer')"
+        >
+          <span>👩</span>
+          <strong>Mujer</strong>
+        </button>
+
+        <button
+          type="button"
+          class="genero-btn"
+          onclick="elegirGenero('Unisex')"
+        >
+          <span>🧑</span>
+          <strong>Unisex</strong>
+        </button>
+
+      </div>
+    </div>
+  </div>
+</section>
 
       <div class="contenedor">
 

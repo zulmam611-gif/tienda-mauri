@@ -217,10 +217,19 @@ const iniciarSesionAdministrador =
 const mensajeLogin =
   document.getElementById("mensajeLogin");
 
+const abrirLoginAdmin = document.getElementById("abrirLoginAdmin");
+
+abrirLoginAdmin.addEventListener("click", () => {
+  modalLogin.style.display = "flex";
+});
+
+cerrarLogin.addEventListener("click", () => {
+  modalLogin.style.display = "none";
+});
 /*
-=========================================
+==================================================
 FUNCIONES GENERALES
-=========================================
+==================================================
 */
 
 function formatearGuaranies(numero) {
@@ -316,6 +325,9 @@ onSnapshot(
 MOSTRAR PRODUCTOS EN LA TIENDA
 ==================================================
 */
+
+const listaProductos =
+  document.getElementById("listaProductos");
 
 function renderizarProductos() {
 
@@ -2096,23 +2108,7 @@ if (cerrarPanelAdministrador) {
     cerrarPanelAdministrador.addEventListener("click", () => {
         document.getElementById("panelAdministrador").classList.remove("activo");
     });
-}window.seleccionarCategoria = function (categoria) {
-  const generoElegido = prompt(
-    "Elegí el género:\n\n1 - Hombre\n2 - Mujer\n3 - Unisex"
-  );
-
-  let genero = "";
-
-  if (generoElegido === "1") {
-    genero = "Hombre";
-  } else if (generoElegido === "2") {
-    genero = "Mujer";
-  } else if (generoElegido === "3") {
-    genero = "Unisex";
-  } else {
-    return;
-  }
-
+}
   filtroCategoria.value = categoria;
   filtroGenero.value = genero;
 
@@ -2121,4 +2117,62 @@ if (cerrarPanelAdministrador) {
   document
     .getElementById("productos")
     ?.scrollIntoView({ behavior: "smooth" });
+};let categoriaElegida = "";
+
+window.abrirGeneros = function (categoria) {
+  categoriaElegida = categoria;
+
+  const seccionCategorias =
+    document.getElementById("seccionCategorias");
+
+  const seccionGeneros =
+    document.getElementById("seccionGeneros");
+
+  const titulo =
+    document.getElementById("tituloCategoriaGenero");
+
+  titulo.textContent = categoria + ": elegí el género";
+
+  seccionCategorias.style.display = "none";
+  seccionGeneros.classList.add("activa");
+
+  seccionGeneros.scrollIntoView({
+    behavior: "smooth",
+    block: "start"
+  });
+};
+
+window.volverCategorias = function () {
+  const seccionCategorias =
+    document.getElementById("seccionCategorias");
+
+  const seccionGeneros =
+    document.getElementById("seccionGeneros");
+
+  seccionGeneros.classList.remove("activa");
+  seccionCategorias.style.display = "block";
+
+  seccionCategorias.scrollIntoView({
+    behavior: "smooth",
+    block: "start"
+  });
+};
+
+window.elegirGenero = function (genero) {
+  filtroCategoria.value = categoriaElegida;
+  filtroGenero.value = genero;
+
+  renderizarProductos();
+
+  const seccionGeneros =
+    document.getElementById("seccionGeneros");
+
+  seccionGeneros.classList.remove("activa");
+
+  document
+    .getElementById("productos")
+    .scrollIntoView({
+      behavior: "smooth",
+      block: "start"
+    });
 };
