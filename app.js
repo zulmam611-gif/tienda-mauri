@@ -217,15 +217,7 @@ const iniciarSesionAdministrador =
 const mensajeLogin =
   document.getElementById("mensajeLogin");
 
-const abrirLoginAdmin = document.getElementById("abrirLoginAdmin");
 
-abrirLoginAdmin.addEventListener("click", () => {
-  modalLogin.style.display = "flex";
-});
-
-cerrarLogin.addEventListener("click", () => {
-  modalLogin.style.display = "none";
-});
 /*
 ==================================================
 FUNCIONES GENERALES
@@ -2117,7 +2109,9 @@ if (cerrarPanelAdministrador) {
   document
     .getElementById("productos")
     ?.scrollIntoView({ behavior: "smooth" });
-};let categoriaElegida = "";
+};
+
+let categoriaElegida = "";
 
 window.abrirGeneros = function (categoria) {
   categoriaElegida = categoria;
