@@ -217,6 +217,12 @@ const iniciarSesionAdministrador =
 const mensajeLogin =
   document.getElementById("mensajeLogin");
 
+const abrirLoginAdmin = document.getElementById("abrirLoginAdmin");
+
+abrirLoginAdmin.addEventListener("click", () => {
+  modalLogin.style.display = "flex";
+});
+
 cerrarLogin.addEventListener("click", () => {
   modalLogin.style.display = "none";
 });
@@ -337,7 +343,15 @@ function renderizarProductos() {
 
   const categoriaSeleccionada =
     filtroCategoria.value;
-
+    
+if (
+  textoBusqueda === "" &&
+  generoSeleccionado === "" &&
+  categoriaSeleccionada === ""
+) {
+  contenedorProductos.innerHTML = "";
+  return;
+}
 
   resultado = resultado.filter(
     function(producto) {
@@ -2061,4 +2075,19 @@ INICIAR CARRITO
 ==================================================
 */
 
-actualizarCarrito()
+actualizarCarrito();document.getElementById("abrirLoginAdmin")?.addEventListener("click", () => {
+  const ventanaLogin = document.getElementById("modalLogin");
+
+  ventanaLogin.classList.add("activo");
+  ventanaLogin.style.display = "flex";
+  ventanaLogin.style.visibility = "visible";
+  ventanaLogin.style.opacity = "1";
+  ventanaLogin.style.pointerEvents = "auto";
+});
+
+document.getElementById("cerrarLogin")?.addEventListener("click", () => {
+  const ventanaLogin = document.getElementById("modalLogin");
+
+  ventanaLogin.classList.remove("activo");
+  ventanaLogin.style.display = "none";
+});
