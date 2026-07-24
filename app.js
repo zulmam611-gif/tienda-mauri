@@ -217,10 +217,10 @@ const iniciarSesionAdministrador =
 const mensajeLogin =
   document.getElementById("mensajeLogin");
 
-
-==================================================
+/*
+=========================================
 FUNCIONES GENERALES
-==================================================
+=========================================
 */
 
 function formatearGuaranies(numero) {
