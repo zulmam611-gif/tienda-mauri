@@ -354,15 +354,8 @@ function renderizarProductos() {
 ) {
   listaProductos.innerHTML = "";
   return;
-}
-if (
-  textoBusqueda === "" &&
-  generoSeleccionado === "" &&
-  categoriaSeleccionada === ""
-) {
-  listaProductos.innerHTML = "";
-  return;
-}
+  }
+
 
   resultado = resultado.filter(
     function(producto) {
