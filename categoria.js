@@ -56,6 +56,7 @@ if (tituloCategoria) {
    ========================================= */
 
 async function cargarProductosFirebase() {
+  console.log("Intentando cargar Firebase...");
   if (!listaProductos) return;
 
   listaProductos.innerHTML = `
@@ -80,7 +81,7 @@ async function cargarProductosFirebase() {
       <p class="mensaje-productos">
         No se pudieron cargar los productos.
       </p>
-    `;
+    `; 
   }
 }
 
