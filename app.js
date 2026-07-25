@@ -2098,14 +2098,7 @@ if (cerrarPanelAdministrador) {
         document.getElementById("panelAdministrador").classList.remove("activo");
     });
 }
-  filtroCategoria.value = categoria;
-  filtroGenero.value = genero;
-
-  renderizarProductos();
-
-  document
-    .getElementById("productos")
-    ?.scrollIntoView({ behavior: "smooth" });
+  
    let categoriaElegida = "";
 
 window.abrirGeneros = function (categoria) {
