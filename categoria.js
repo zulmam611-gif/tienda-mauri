@@ -273,4 +273,6 @@ function escaparHTML(texto) {
    INICIAR
    ========================================= */
 
+   console.log("categoria.js cargado");
+   
 cargarProductosFirebase();
