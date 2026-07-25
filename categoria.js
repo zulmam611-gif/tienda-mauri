@@ -59,7 +59,6 @@ if (tituloCategoria) {
    ========================================= */
 
 async function cargarProductosFirebase() {
-  console.log("Intentando cargar Firebase...");
   if (!listaProductos) return;
 
   listaProductos.innerHTML = `
@@ -69,15 +68,33 @@ async function cargarProductosFirebase() {
   `;
 
   try {
-    const consulta = await getDocs(collection(db, "productos"));
+    const respuesta = await fetch(
+      "https://firestore.googleapis.com/v1/projects/urban-style-501d5/databases/(default)/documents/productos"
+    );
 
-    console.log("Cantidad de productos:",
-    consulta.size);
+    if (!respuesta.ok) {
+      throw new Error("No se pudieron descargar los productos");
+    }
 
-    productosFirebase = consulta.docs.map((documento) => ({
-      id: documento.id,
-      ...documento.data()
-    }));
+    const datos = await respuesta.json();
+
+    productosFirebase = (datos.documents || []).map((documento) => {
+      const campos = documento.fields || {};
+
+      return {
+        id: documento.name?.split("/").pop() || "",
+        nombre: campos.nombre?.stringValue || "Producto",
+        descripcion: campos.descripcion?.stringValue || "",
+        categoria: campos.categoria?.stringValue || "",
+        genero: campos.genero?.stringValue || "",
+        imagen: campos.imagen?.stringValue || "",
+        precio: Number(
+          campos.precio?.integerValue ||
+          campos.precio?.doubleValue ||
+          0
+        )
+      };
+    });
 
     console.log("Productos cargados:", productosFirebase);
   } catch (error) {
@@ -87,7 +104,7 @@ async function cargarProductosFirebase() {
       <p class="mensaje-productos">
         No se pudieron cargar los productos.
       </p>
-    `; 
+    `;
   }
 }
 
