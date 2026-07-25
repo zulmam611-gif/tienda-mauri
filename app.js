@@ -55,7 +55,7 @@ CONFIGURACIÓN DE LA TIENDA
 ==================================================
 */
 
-const WHATSAPP = "5950982766005";
+const WHATSAPP = "595982766005";
 
 const IMAGEN_PREDETERMINADA =
   "https://placehold.co/700x800?text=Producto";
@@ -134,6 +134,11 @@ const direccionCliente =
 
 const enviarPedido =
   document.getElementById("enviarPedido");
+
+  const consultarCarritoWhatsApp =
+  document.getElementById(
+    "consultarCarritoWhatsApp"
+  );
 
 const vaciarCarrito =
   document.getElementById("vaciarCarrito");
@@ -1015,6 +1020,55 @@ vaciarCarrito.addEventListener(
 WHATSAPP
 ==================================================
 */
+
+consultarCarritoWhatsApp.addEventListener(
+  "click",
+  function () {
+
+    if (carrito.length === 0) {
+      alert(
+        "Agregá productos al carrito primero."
+      );
+      return;
+    }
+
+    let mensaje =
+      "Hola, quiero consultar por estos productos:\n\n";
+
+    carrito.forEach(function (producto) {
+
+      mensaje +=
+        "• " +
+        producto.nombre +
+        " x" +
+        producto.cantidad +
+        " - " +
+        formatearGuaranies(
+          Number(producto.precio) *
+          Number(producto.cantidad)
+        ) +
+        "\n";
+
+    });
+
+    mensaje +=
+      "\nTotal: " +
+      formatearGuaranies(
+        calcularTotalCarrito()
+      );
+
+    const enlace =
+      "https://wa.me/" +
+      WHATSAPP +
+      "?text=" +
+      encodeURIComponent(mensaje);
+
+    window.open(
+      enlace,
+      "_blank"
+    );
+  }
+);
 
 function consultarPorWhatsApp(idProducto) {
 
