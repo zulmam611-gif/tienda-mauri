@@ -297,3 +297,4 @@ function escaparHTML(texto) {
    console.log("categoria.js cargado");
    
 cargarProductosFirebase();
+
