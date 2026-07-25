@@ -127,11 +127,8 @@ window.seleccionarGenero = async function (generoElegido) {
       `${categoriaElegida} - ${generoElegido}`;
   }
 
-  if (productosFirebase.length === 0) {
-    await cargarProductosFirebase();
-  }
-
-  mostrarProductos(categoriaElegida, generoElegido);
+ await cargarProductosFirebase();
+mostrarProductos(categoriaElegida, generoElegido);
 };
 
 
