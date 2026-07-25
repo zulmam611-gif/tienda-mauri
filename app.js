@@ -317,6 +317,8 @@ MOSTRAR PRODUCTOS EN LA TIENDA
 ==================================================
 */
 
+const listaProductos =
+  document.getElementById("listaProductos");
 
 function renderizarProductos() {
 
@@ -2098,6 +2100,15 @@ if (cerrarPanelAdministrador) {
         document.getElementById("panelAdministrador").classList.remove("activo");
     });
 }
+  filtroCategoria.value = categoria;
+  filtroGenero.value = genero;
+
+  renderizarProductos();
+
+  document
+    .getElementById("productos")
+    ?.scrollIntoView({ behavior: "smooth" });
+   let categoriaElegida = "";
 
 window.abrirGeneros = function (categoria) {
   categoriaElegida = categoria;
@@ -2155,8 +2166,11 @@ window.elegirGenero = function (genero) {
       behavior: "smooth",
       block: "start"
     });
-};window.abrirCategoria = function (categoria) {
+};
+
+window.abrirCategoria = function (categoria) {
   window.location.href =
     "categoria.html?categoria=" +
     encodeURIComponent(categoria);
+    
 };
