@@ -70,6 +70,9 @@ async function cargarProductosFirebase() {
   try {
     const consulta = await getDocs(collection(db, "productos"));
 
+    console.log("Cantidad de productos:",
+    consulta.size);
+
     productosFirebase = consulta.docs.map((documento) => ({
       id: documento.id,
       ...documento.data()
