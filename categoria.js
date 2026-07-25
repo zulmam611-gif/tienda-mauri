@@ -1,168 +1,160 @@
-import { initializeApp } from "https://www.gstatic.com/firebasejs/12.7.0/firebase-app.js";
-
-import {
-  initializeFirestore,
-  collection,
-  getDocs
-} from "https://www.gstatic.com/firebasejs/12.7.0/firebase-firestore.js";
-
-
-/* =========================================
-   CONFIGURACIÓN DE FIREBASE
-   ========================================= */
-
-const firebaseConfig = {
-  apiKey: "AIzaSyB5jLbRRUbLzfirkiBySrNQW5qNYrh4IHM",
-  authDomain: "urban-style-501d5.firebaseapp.com",
-  projectId: "urban-style-501d5",
-  storageBucket: "urban-style-501d5.firebasestorage.app",
-  messagingSenderId: "401559108584",
-  appId: "1:401559108584:web:9cc8b008b8f289b15e825d",
-  measurementId: "G-C6JCRW03CG"
-};
-
-const app = initializeApp(firebaseConfig);
-const db = initializeFirestore(app, {
-  experimentalForceLongPolling: true,
-  useFetchSreams: false
-});
-
-
-/* =========================================
-   ELEMENTOS DE LA PÁGINA
-   ========================================= */
-
 const parametros = new URLSearchParams(window.location.search);
 const categoriaElegida = parametros.get("categoria") || "";
 
-const tituloCategoria = document.getElementById("tituloCategoria");
-const pasoGenero = document.getElementById("pasoGenero");
-const pasoProductos = document.getElementById("pasoProductos");
-const tituloProductos = document.getElementById("tituloProductos");
-const listaProductos = document.getElementById("listaCategoriaProductos");
+const tituloCategoria =
+  document.getElementById("tituloCategoria");
+
+const pasoGenero =
+  document.getElementById("pasoGenero");
+
+const pasoProductos =
+  document.getElementById("pasoProductos");
+
+const tituloProductos =
+  document.getElementById("tituloProductos");
+
+const listaProductos =
+  document.getElementById("listaCategoriaProductos");
 
 let productosFirebase = [];
-
-
-/* =========================================
-   MOSTRAR NOMBRE DE LA CATEGORÍA
-   ========================================= */
 
 if (tituloCategoria) {
   tituloCategoria.textContent =
     categoriaElegida || "Elegí una categoría";
 }
 
-
-/* =========================================
-   CARGAR PRODUCTOS DE FIREBASE
-   ========================================= */
-
 async function cargarProductosFirebase() {
   if (!listaProductos) return;
 
-  listaProductos.innerHTML = `
-    <p class="mensaje-productos">
-      Cargando productos...
-    </p>
-  `;
+  listaProductos.innerHTML =
+    "<p>Cargando productos...</p>";
 
   try {
     const respuesta = await fetch(
-      "https://firestore.googleapis.com/v1/projects/urban-style-501d5/databases/(default)/documents/productos"
+      "https://firestore.googleapis.com/v1/projects/urban-style-501d5/databases/(default)/documents/productos",
+      { cache: "no-store" }
     );
 
     if (!respuesta.ok) {
-      throw new Error("No se pudieron descargar los productos");
+      throw new Error(
+        "Error al descargar productos: " +
+        respuesta.status
+      );
     }
 
     const datos = await respuesta.json();
 
-    productosFirebase = (datos.documents || []).map((documento) => {
-      const campos = documento.fields || {};
+    productosFirebase = (datos.documents || []).map(
+      (documento) => {
+        const campos = documento.fields || {};
 
-      return {
-        id: documento.name?.split("/").pop() || "",
-        nombre: campos.nombre?.stringValue || "Producto",
-        descripcion: campos.descripcion?.stringValue || "",
-        categoria: campos.categoria?.stringValue || "",
-        genero: campos.genero?.stringValue || "",
-        imagen: campos.imagen?.stringValue || "",
-        precio: Number(
-          campos.precio?.integerValue ||
-          campos.precio?.doubleValue ||
-          0
-        )
-      };
-    });
+        return {
+          id:
+            documento.name?.split("/").pop() || "",
 
-    console.log("Productos cargados:", productosFirebase);
+          nombre:
+            campos.nombre?.stringValue || "Producto",
+
+          descripcion:
+            campos.descripcion?.stringValue || "",
+
+          categoria:
+            campos.categoria?.stringValue || "",
+
+          genero:
+            campos.genero?.stringValue || "",
+
+          imagen:
+            campos.imagen?.stringValue ||
+            campos.imagenURL?.stringValue ||
+            campos.imageUrl?.stringValue ||
+            campos.urlImagen?.stringValue ||
+            "",
+
+          precio: Number(
+            campos.precio?.integerValue ||
+            campos.precio?.doubleValue ||
+            0
+          )
+        };
+      }
+    );
+
+    console.log(
+      "Productos descargados:",
+      productosFirebase
+    );
   } catch (error) {
-    console.error("Error al cargar productos:", error);
+    console.error(error);
 
-    listaProductos.innerHTML = `
-      <p class="mensaje-productos">
-        No se pudieron cargar los productos.
-      </p>
-    `;
+    listaProductos.innerHTML =
+      "<p>No se pudieron cargar los productos.</p>";
+
+    throw error;
   }
 }
 
+window.seleccionarGenero =
+  async function (generoElegido) {
 
-/* =========================================
-   ELEGIR GÉNERO
-   ========================================= */
+    if (pasoGenero) {
+      pasoGenero.style.display = "none";
+    }
 
-window.seleccionarGenero = async function (generoElegido) {
-  if (pasoGenero) {
-    pasoGenero.style.display = "none";
-  }
+    if (pasoProductos) {
+      pasoProductos.style.display = "block";
+    }
 
-  if (pasoProductos) {
-    pasoProductos.style.display = "block";
-  }
+    if (tituloProductos) {
+      tituloProductos.textContent =
+        categoriaElegida + " - " + generoElegido;
+    }
 
-  if (tituloProductos) {
-    tituloProductos.textContent =
-      `${categoriaElegida} - ${generoElegido}`;
-  }
+    try {
+      await cargarProductosFirebase();
 
- await cargarProductosFirebase();
-mostrarProductos(categoriaElegida, generoElegido);
-};
-
-
-/* =========================================
-   FILTRAR Y MOSTRAR PRODUCTOS
-   ========================================= */
+      mostrarProductos(
+        categoriaElegida,
+        generoElegido
+      );
+    } catch (error) {
+      console.error(
+        "No fue posible mostrar productos:",
+        error
+      );
+    }
+  };
 
 function mostrarProductos(categoria, genero) {
   if (!listaProductos) return;
 
-  const categoriaNormalizada = normalizarTexto(categoria);
-  const generoNormalizado = normalizarTexto(genero);
+  const categoriaNormalizada =
+    normalizarTexto(categoria);
 
-  const productosFiltrados = productosFirebase.filter((producto) => {
-    const categoriaProducto = normalizarTexto(
-      producto.categoria || producto.category || ""
-    );
+  const generoNormalizado =
+    normalizarTexto(genero);
 
-    const generoProducto = normalizarTexto(
-      producto.genero || producto.gender || ""
-    );
+  const productosFiltrados =
+    productosFirebase.filter((producto) => {
+      return (
+        normalizarTexto(producto.categoria) ===
+          categoriaNormalizada &&
+        normalizarTexto(producto.genero) ===
+          generoNormalizado
+      );
+    });
 
-    return (
-      categoriaProducto === categoriaNormalizada &&
-      generoProducto === generoNormalizado
-    );
-  });
+  console.log(
+    "Productos filtrados:",
+    productosFiltrados
+  );
 
   if (productosFiltrados.length === 0) {
     listaProductos.innerHTML = `
       <div class="sin-productos">
         <h3>No hay productos disponibles</h3>
         <p>
-          Todavía no hay productos de
+          No hay productos de
           <strong>${escaparHTML(categoria)}</strong>
           para
           <strong>${escaparHTML(genero)}</strong>.
@@ -173,48 +165,22 @@ function mostrarProductos(categoria, genero) {
     return;
   }
 
-  listaProductos.innerHTML = productosFiltrados
-    .map((producto) => crearTarjetaProducto(producto))
-    .join("");
+  listaProductos.innerHTML =
+    productosFiltrados
+      .map(crearTarjetaProducto)
+      .join("");
 }
 
-
-/* =========================================
-   CREAR TARJETA DE PRODUCTO
-   ========================================= */
-
 function crearTarjetaProducto(producto) {
-  const nombre =
-    producto.nombre ||
-    producto.name ||
-    "Producto";
-
-  const descripcion =
-    producto.descripcion ||
-    producto.description ||
-    "";
-
-  const precio =
-    producto.precio ||
-    producto.price ||
-    0;
-
-  const imagen =
-    producto.imagen ||
-    producto.imagenURL ||
-    producto.imageUrl ||
-    producto.urlImagen ||
-    "";
-
   return `
     <article class="producto-card">
 
       ${
-        imagen
+        producto.imagen
           ? `
             <img
-              src="${escaparHTML(imagen)}"
-              alt="${escaparHTML(nombre)}"
+              src="${escaparHTML(producto.imagen)}"
+              alt="${escaparHTML(producto.nombre)}"
               loading="lazy"
             >
           `
@@ -227,16 +193,22 @@ function crearTarjetaProducto(producto) {
 
       <div class="producto-contenido">
 
-        <h3>${escaparHTML(nombre)}</h3>
+        <h3>
+          ${escaparHTML(producto.nombre)}
+        </h3>
 
         ${
-          descripcion
-            ? `<p>${escaparHTML(descripcion)}</p>`
+          producto.descripcion
+            ? `
+              <p>
+                ${escaparHTML(producto.descripcion)}
+              </p>
+            `
             : ""
         }
 
         <strong class="producto-precio">
-          ${formatearGuaranies(precio)}
+          ${formatearGuaranies(producto.precio)}
         </strong>
 
       </div>
@@ -244,11 +216,6 @@ function crearTarjetaProducto(producto) {
     </article>
   `;
 }
-
-
-/* =========================================
-   VOLVER A ELEGIR GÉNERO
-   ========================================= */
 
 window.volverAGeneros = function () {
   if (pasoProductos) {
@@ -264,13 +231,8 @@ window.volverAGeneros = function () {
   }
 };
 
-
-/* =========================================
-   FUNCIONES AUXILIARES
-   ========================================= */
-
 function normalizarTexto(texto) {
-  return String(texto)
+  return String(texto || "")
     .trim()
     .toLowerCase()
     .normalize("NFD")
@@ -280,21 +242,17 @@ function normalizarTexto(texto) {
 function formatearGuaranies(numero) {
   const valor = Number(numero) || 0;
 
-  return "Gs. " + valor.toLocaleString("es-PY");
+  return (
+    "Gs. " +
+    valor.toLocaleString("es-PY")
+  );
 }
 
 function escaparHTML(texto) {
-  const elemento = document.createElement("div");
+  const elemento =
+    document.createElement("div");
+
   elemento.textContent = texto ?? "";
+
   return elemento.innerHTML;
 }
-
-
-/* =========================================
-   INICIAR
-   ========================================= */
-
-   console.log("categoria.js cargado");
-   
-cargarProductosFirebase();
-
