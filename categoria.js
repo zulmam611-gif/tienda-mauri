@@ -18,21 +18,36 @@ const listaProductos =
 
 let productosFirebase = [];
 
+
+/* =========================================
+   MOSTRAR CATEGORÍA
+   ========================================= */
+
 if (tituloCategoria) {
   tituloCategoria.textContent =
     categoriaElegida || "Elegí una categoría";
 }
 
+
+/* =========================================
+   DESCARGAR PRODUCTOS
+   ========================================= */
+
 async function cargarProductosFirebase() {
   if (!listaProductos) return;
 
-  listaProductos.innerHTML =
-    "<p>Cargando productos...</p>";
+  listaProductos.innerHTML = `
+    <p class="mensaje-productos">
+      Cargando productos...
+    </p>
+  `;
 
   try {
     const respuesta = await fetch(
       "https://firestore.googleapis.com/v1/projects/urban-style-501d5/databases/(default)/documents/productos",
-      { cache: "no-store" }
+      {
+        cache: "no-store"
+      }
     );
 
     if (!respuesta.ok) {
@@ -44,55 +59,70 @@ async function cargarProductosFirebase() {
 
     const datos = await respuesta.json();
 
-    productosFirebase = (datos.documents || []).map(
-      (documento) => {
+    productosFirebase =
+      (datos.documents || []).map((documento) => {
         const campos = documento.fields || {};
 
         return {
           id:
-            documento.name?.split("/").pop() || "",
+            documento.name
+              ?.split("/")
+              .pop() || "",
 
           nombre:
-            campos.nombre?.stringValue || "Producto",
+            leerCampo(campos.nombre) ||
+            "Producto",
 
           descripcion:
-            campos.descripcion?.stringValue || "",
+            leerCampo(campos.descripcion) ||
+            "",
 
           categoria:
-            campos.categoria?.stringValue || "",
+            leerCampo(campos.categoria) ||
+            "",
 
           genero:
-            campos.genero?.stringValue || "",
+            leerCampo(campos.genero) ||
+            "",
 
           imagen:
-            campos.imagen?.stringValue ||
-            campos.imagenURL?.stringValue ||
-            campos.imageUrl?.stringValue ||
-            campos.urlImagen?.stringValue ||
+            leerCampo(campos.imagen) ||
+            leerCampo(campos.imagenURL) ||
+            leerCampo(campos.imageUrl) ||
+            leerCampo(campos.urlImagen) ||
             "",
 
           precio: Number(
-            campos.precio?.integerValue ||
-            campos.precio?.doubleValue ||
-            0
+            leerCampo(campos.precio) || 0
           )
         };
-      }
-    );
+      });
 
     console.log(
-      "Productos descargados:",
+      "Productos cargados:",
       productosFirebase
     );
-  } catch (error) {
-    console.error(error);
 
-    listaProductos.innerHTML =
-      "<p>No se pudieron cargar los productos.</p>";
+  } catch (error) {
+    console.error(
+      "Error al cargar productos:",
+      error
+    );
+
+    listaProductos.innerHTML = `
+      <p class="mensaje-productos">
+        No se pudieron cargar los productos.
+      </p>
+    `;
 
     throw error;
   }
 }
+
+
+/* =========================================
+   ELEGIR GÉNERO
+   ========================================= */
 
 window.seleccionarGenero =
   async function (generoElegido) {
@@ -107,7 +137,9 @@ window.seleccionarGenero =
 
     if (tituloProductos) {
       tituloProductos.textContent =
-        categoriaElegida + " - " + generoElegido;
+        categoriaElegida +
+        " - " +
+        generoElegido;
     }
 
     try {
@@ -117,13 +149,19 @@ window.seleccionarGenero =
         categoriaElegida,
         generoElegido
       );
+
     } catch (error) {
       console.error(
-        "No fue posible mostrar productos:",
+        "No se pudieron mostrar los productos:",
         error
       );
     }
   };
+
+
+/* =========================================
+   FILTRAR PRODUCTOS
+   ========================================= */
 
 function mostrarProductos(categoria, genero) {
   if (!listaProductos) return;
@@ -136,29 +174,40 @@ function mostrarProductos(categoria, genero) {
 
   const productosFiltrados =
     productosFirebase.filter((producto) => {
+
+      const categoriaProducto =
+        normalizarTexto(producto.categoria);
+
+      const generoProducto =
+        normalizarTexto(producto.genero);
+
       return (
-        normalizarTexto(producto.categoria) ===
+        categoriaProducto ===
           categoriaNormalizada &&
-        normalizarTexto(producto.genero) ===
+        generoProducto ===
           generoNormalizado
       );
     });
 
-  console.log(
-    "Productos filtrados:",
-    productosFiltrados
-  );
-
   if (productosFiltrados.length === 0) {
     listaProductos.innerHTML = `
       <div class="sin-productos">
-        <h3>No hay productos disponibles</h3>
+
+        <h3>
+          No hay productos disponibles
+        </h3>
+
         <p>
           No hay productos de
-          <strong>${escaparHTML(categoria)}</strong>
+          <strong>
+            ${escaparHTML(categoria)}
+          </strong>
           para
-          <strong>${escaparHTML(genero)}</strong>.
+          <strong>
+            ${escaparHTML(genero)}
+          </strong>.
         </p>
+
       </div>
     `;
 
@@ -169,7 +218,14 @@ function mostrarProductos(categoria, genero) {
     productosFiltrados
       .map(crearTarjetaProducto)
       .join("");
+
+  activarBotonesProductos();
 }
+
+
+/* =========================================
+   CREAR TARJETA DEL PRODUCTO
+   ========================================= */
 
 function crearTarjetaProducto(producto) {
   return `
@@ -211,13 +267,185 @@ function crearTarjetaProducto(producto) {
           ${formatearGuaranies(producto.precio)}
         </strong>
 
+        <div class="producto-acciones">
+
+          <button
+            class="boton boton-principal"
+            type="button"
+            data-agregar-categoria="${escaparHTML(producto.id)}"
+          >
+            Agregar al carrito
+          </button>
+
+          <button
+            class="boton boton-secundario"
+            type="button"
+            data-consultar-categoria="${escaparHTML(producto.id)}"
+          >
+            Preguntar por WhatsApp
+          </button>
+
+        </div>
+
       </div>
 
     </article>
   `;
 }
 
+
+/* =========================================
+   ACTIVAR LOS BOTONES
+   ========================================= */
+
+function activarBotonesProductos() {
+
+  document
+    .querySelectorAll(
+      "[data-agregar-categoria]"
+    )
+    .forEach((boton) => {
+
+      boton.addEventListener(
+        "click",
+        () => {
+          agregarProductoAlCarrito(
+            boton.dataset.agregarCategoria
+          );
+        }
+      );
+
+    });
+
+  document
+    .querySelectorAll(
+      "[data-consultar-categoria]"
+    )
+    .forEach((boton) => {
+
+      boton.addEventListener(
+        "click",
+        () => {
+          consultarProductoPorWhatsApp(
+            boton.dataset.consultarCategoria
+          );
+        }
+      );
+
+    });
+}
+
+
+/* =========================================
+   AGREGAR AL CARRITO
+   ========================================= */
+
+function agregarProductoAlCarrito(idProducto) {
+
+  const productoEncontrado =
+    productosFirebase.find(
+      (producto) =>
+        producto.id === idProducto
+    );
+
+  if (!productoEncontrado) {
+    return;
+  }
+
+  let carrito = [];
+
+  try {
+    carrito =
+      JSON.parse(
+        localStorage.getItem(
+          "carritoUrbanStyleV2"
+        )
+      ) || [];
+
+  } catch (error) {
+    carrito = [];
+  }
+
+  const productoEnCarrito =
+    carrito.find(
+      (producto) =>
+        producto.id === idProducto
+    );
+
+  if (productoEnCarrito) {
+
+    productoEnCarrito.cantidad += 1;
+
+  } else {
+
+    carrito.push({
+      id: productoEncontrado.id,
+      nombre: productoEncontrado.nombre,
+      precio: Number(
+        productoEncontrado.precio
+      ),
+      imagen:
+        productoEncontrado.imagen || "",
+      cantidad: 1
+    });
+
+  }
+
+  localStorage.setItem(
+    "carritoUrbanStyleV2",
+    JSON.stringify(carrito)
+  );
+
+  alert(
+    productoEncontrado.nombre +
+    " fue agregado al carrito."
+  );
+}
+
+
+/* =========================================
+   PREGUNTAR POR WHATSAPP
+   ========================================= */
+
+function consultarProductoPorWhatsApp(
+  idProducto
+) {
+
+  const productoEncontrado =
+    productosFirebase.find(
+      (producto) =>
+        producto.id === idProducto
+    );
+
+  if (!productoEncontrado) {
+    return;
+  }
+
+  const mensaje =
+    "Hola, quiero consultar por este producto:\n\n" +
+    productoEncontrado.nombre +
+    "\nPrecio: " +
+    formatearGuaranies(
+      productoEncontrado.precio
+    );
+
+  const enlace =
+    "https://wa.me/5950982766005?text=" +
+    encodeURIComponent(mensaje);
+
+  window.open(
+    enlace,
+    "_blank"
+  );
+}
+
+
+/* =========================================
+   VOLVER A LOS GÉNEROS
+   ========================================= */
+
 window.volverAGeneros = function () {
+
   if (pasoProductos) {
     pasoProductos.style.display = "none";
   }
@@ -231,12 +459,34 @@ window.volverAGeneros = function () {
   }
 };
 
+
+/* =========================================
+   FUNCIONES AUXILIARES
+   ========================================= */
+
+function leerCampo(campo) {
+  if (!campo) {
+    return "";
+  }
+
+  return (
+    campo.stringValue ??
+    campo.integerValue ??
+    campo.doubleValue ??
+    campo.booleanValue ??
+    ""
+  );
+}
+
 function normalizarTexto(texto) {
   return String(texto || "")
     .trim()
     .toLowerCase()
     .normalize("NFD")
-    .replace(/[\u0300-\u036f]/g, "");
+    .replace(
+      /[\u0300-\u036f]/g,
+      ""
+    );
 }
 
 function formatearGuaranies(numero) {
@@ -252,7 +502,8 @@ function escaparHTML(texto) {
   const elemento =
     document.createElement("div");
 
-  elemento.textContent = texto ?? "";
+  elemento.textContent =
+    texto ?? "";
 
   return elemento.innerHTML;
 }
