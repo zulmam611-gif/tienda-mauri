@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>Categoría</title>
+
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <main class="pagina-categoria">
+
+    <div class="contenedor">
+
+      <button
+        class="boton-volver-categorias"
+        onclick="window.location.href='index.html'"
+      >
+        ← Volver a la tienda
+      </button>
+
+      <section id="pasoGenero">
+
+        <span class="subtitulo-categoria">
+          ELEGÍ EL GÉNERO
+        </span>
+
+        <h1 id="tituloCategoria">
+          Productos
+        </h1>
+
+        <div class="generos-grid">
+
+          <button
+            class="genero-btn"
+            onclick="seleccionarGenero('Hombre')"
+          >
+            <span>👨</span>
+            <strong>Hombre</strong>
+          </button>
+
+          <button
+            class="genero-btn"
+            onclick="seleccionarGenero('Mujer')"
+          >
+            <span>👩</span>
+            <strong>Mujer</strong>
+          </button>
+
+          <button
+            class="genero-btn"
+            onclick="seleccionarGenero('Unisex')"
+          >
+            <span>🧑</span>
+            <strong>Unisex</strong>
+          </button>
+
+        </div>
+
+      </section>
+
+      <section
+        id="pasoProductos"
+        style="display: none;"
+      >
+
+        <button
+          class="boton-volver-categorias"
+          onclick="volverAGeneros()"
+        >
+          ← Cambiar género
+        </button>
+
+        <h2 id="tituloProductos">
+          Productos
+        </h2>
+
+        <div class="grupo-busqueda">
+
+          <input
+            id="busquedaCategoria"
+            type="search"
+            placeholder="Buscar producto..."
+          >
+
+        </div>
+
+        <div id="listaCategoriaProductos"></div>
+
+      </section>
+
+    </div>
+
+  </main>
+
+  <script type="module" src="categoria.js"></script>
+
+</body>
+</html>
